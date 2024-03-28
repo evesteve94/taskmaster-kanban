@@ -3,6 +3,7 @@ import Header from "./Header";
 import ListContainer from "./ListContainer";
 import Footer from "./Footer";
 import Modal from "./Modal";
+import { Routes, Route } from "react-router-dom";
 
 function App() {
   const [tasks, setTasks] = useState(() => {
@@ -17,7 +18,6 @@ function App() {
   const [selectedTask, setSelectedTask] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  //hämtar tasken som klickats för redigering i modalen
   const toggleModal = (taskId) => {
     const taskToEdit = tasks.find((task) => task.id === taskId);
     setSelectedTask(taskToEdit); // Set the selected task
@@ -31,11 +31,19 @@ function App() {
   return (
     <div className="App">
       <Header tasks={tasks} setTasks={setTasks} />
-      <ListContainer
-        tasks={tasks}
-        setTasks={setTasks}
-        toggleModal={toggleModal}
-      />
+      <Routes>
+        {/* Route for the list container */}
+        <Route
+          path="/"
+          element={
+            <ListContainer
+              tasks={tasks}
+              setTasks={setTasks}
+              toggleModal={toggleModal}
+            />
+          }
+        />
+      </Routes>
       {isModalOpen && (
         <Modal
           task={selectedTask}

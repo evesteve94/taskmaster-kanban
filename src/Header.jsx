@@ -1,10 +1,10 @@
 import React from "react";
 import AddTask from "./AddTask";
 
-const Header = ({ tasks, setTasks }) => {
+const Header = () => {
   return (
     <header>
-      <AddTask tasks={tasks} setTasks={setTasks} />
+      <h1>Task Master</h1>
     </header>
   );
 };

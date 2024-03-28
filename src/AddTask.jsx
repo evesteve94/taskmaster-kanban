@@ -27,13 +27,20 @@ const AddTask = ({ tasks, setTasks }) => {
       category: "todo",
       isOpen: false,
     };
-    setTasks([...tasks, task]);
+    // Update tasks state using the callback form of setTasks
+    setTasks((prevTasks) => {
+      const updatedTasks = [...prevTasks, task];
+      // Update localStorage immediately after updating tasks state
+      localStorage.setItem("tasks", JSON.stringify(updatedTasks));
+      return updatedTasks;
+    });
   };
 
   return (
     <form className="addForm" onSubmit={handleSubmit}>
       <label htmlFor="addTask"></label>
       <input
+        className="add-input"
         type="text"
         autoFocus
         id="addTask"
@@ -43,8 +50,8 @@ const AddTask = ({ tasks, setTasks }) => {
         onChange={(e) => setNewTask(e.target.value)}
         onKeyDown={handleKeyPress}
       />
-      <button type="submit" aria-label="Add Task">
-        Add Task
+      <button className="add-button" type="submit" aria-label="Add Task">
+        +
       </button>
     </form>
   );

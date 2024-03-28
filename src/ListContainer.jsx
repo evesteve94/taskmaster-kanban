@@ -9,6 +9,7 @@ const ListContainer = ({ tasks, setTasks, toggleModal }) => {
         setTasks={setTasks}
         toggleModal={toggleModal}
         title="todo"
+        renderAddTask={true} // Pass a prop to render AddTask inside TaskList
       />
       <TaskList
         tasks={tasks}
@@ -27,3 +28,25 @@ const ListContainer = ({ tasks, setTasks, toggleModal }) => {
 };
 
 export default ListContainer;
+
+// import React from "react";
+// import TaskList from "./TaskList";
+
+// const ListContainer = ({ tasks, setTasks, toggleModal, taskList }) => {
+//   return (
+//     <div className="list-container">
+//       {Object.values(taskList).map((list) => (
+//         <TaskList
+//           key={list.id}
+//           title={list.title}
+//           tasks={tasks}
+//           setTasks={setTasks}
+//           toggleModal={toggleModal}
+//           taskList={list}
+//         />
+//       ))}
+//     </div>
+//   );
+// };
+
+// export default ListContainer;

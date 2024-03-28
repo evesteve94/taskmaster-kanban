@@ -44,10 +44,11 @@ header {
 h1 {
   width: 100%;
   text-align: center;
+  font-size: 2rem;
 }
 
 .list-container {
-  margin-top: 1rem;
+  margin: 1rem;
   width: 100%;
   flex: 1;
   display: flex;
@@ -63,7 +64,7 @@ h1 {
   border-radius: 1rem;
   background-color: var(--main-color);
   width: 300px;
-  height: 700px;
+  /* height: 700px; */
   padding: 0.5rem;
 }
 
@@ -96,6 +97,7 @@ ul li::before {
   border-radius: 0.5rem;
   margin-top: 0.5rem;
   width: 100%;
+  padding: 0.5rem;
 }
 
 .task:hover{
@@ -104,21 +106,31 @@ ul li::before {
 
 .task-title{
   font-size: 1.2rem;
+  margin-bottom: 0.5rem;
 }
 
-.add-button{
-  margin-top: 0.5rem;
+.task-date{
+  margin-bottom: 0.5rem;
 }
 
+.add-input{
+  width: 100%;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+}
 
-/* .addForm {
+.add-button {
+  margin-left: 0.5rem;
+}
+
+.addForm {
   width: 100%;
   display: flex;
   justify-content: flex-start;
   margin: 0.5rem 0 0;
   padding: 0 0.5rem 0.25rem;
-  border-bottom: 1px solid #eee;
 }
+/* .
 
 .addForm label {
   position: absolute;

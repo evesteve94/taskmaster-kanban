@@ -2,14 +2,28 @@ import React from "react";
 import Task from "./Task";
 import AddTask from "./AddTask";
 
-const TaskList = ({ title, tasks, setTasks, openModal, renderAddTask }) => {
+const TaskList = ({
+  title,
+  tasks,
+  setTasks,
+  openModal,
+  renderAddTask,
+  listId,
+  onDeleteList,
+}) => {
   const filteredTasks = tasks.filter((task) => task.category === title);
+
+  const handleDeleteList = () => {
+    onDeleteList(listId); // Call the onDeleteList function with the listId as an argument
+  };
 
   return (
     <ul className="task-list">
       <div className="taskListHeader">
         <h2 className="list-title">{title}</h2>
-        <button className="deleteListButton">x</button>
+        <button className="deleteListButton" onClick={handleDeleteList}>
+          x
+        </button>
       </div>
 
       {filteredTasks.map((task, index) => (

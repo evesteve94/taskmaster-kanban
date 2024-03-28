@@ -28,18 +28,18 @@ const ListContainer = ({ tasks, setTasks, openModal }) => {
   }, [taskLists]);
 
   const [newList, setNewList] = useState("");
-  const [showForm, setShowForm] = useState(false); // State to track whether to show the form or not
+  const [showForm, setShowForm] = useState(false);
 
   const handleListSubmit = (e) => {
     e.preventDefault();
     if (!newList) return;
     addList(newList);
     setNewList("");
-    setShowForm(false); // Hide the form after submitting
+    setShowForm(false);
   };
 
   const addList = (listTitle) => {
-    const id = taskLists.length + 1; // Simple way to generate unique IDs
+    const id = taskLists.length + 1;
     const newList = {
       listId: id,
       title: listTitle,
@@ -48,6 +48,12 @@ const ListContainer = ({ tasks, setTasks, openModal }) => {
       const updatedLists = [...prevLists, newList];
       localStorage.setItem("lists", JSON.stringify(updatedLists));
       return updatedLists;
+    });
+  };
+
+  const onDeleteList = (listIdToDelete) => {
+    setTaskLists((prevLists) => {
+      return prevLists.filter((list) => list.listId !== listIdToDelete);
     });
   };
 
@@ -61,6 +67,8 @@ const ListContainer = ({ tasks, setTasks, openModal }) => {
           openModal={openModal}
           title={taskList.title}
           renderAddTask={taskList.title === "todo"}
+          listId={taskList.listId}
+          onDeleteList={onDeleteList}
         />
       ))}
       {showForm && (

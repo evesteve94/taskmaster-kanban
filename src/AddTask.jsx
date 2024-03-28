@@ -38,7 +38,7 @@ const AddTask = ({ tasks, setTasks }) => {
 
   return (
     <form className="addForm" onSubmit={handleSubmit}>
-      <label htmlFor="addTask"></label>
+      <label htmlFor="addTask">Add Task</label>
       <input
         className="add-input"
         type="text"

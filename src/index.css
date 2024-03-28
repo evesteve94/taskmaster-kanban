@@ -63,7 +63,7 @@ h1 {
 .task-list {
   border-radius: 1rem;
   background-color: var(--main-color);
-  width: 300px;
+  min-width: 200px;
   /* height: 700px; */
   padding: 0.5rem;
 }
@@ -86,6 +86,12 @@ ul {
 
 ul li::before {
   content: "\200B";
+}
+
+.taskListHeader{
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
 }
 
 .list-title{
@@ -113,10 +119,12 @@ ul li::before {
   margin-bottom: 0.5rem;
 }
 
-.add-input{
+.add-input,
+.list-input{
   width: 100%;
-  padding: 0.5rem;
+  padding: 0 0.5rem;
   border-radius: 0.25rem;
+  font-size: 1rem;
 }
 
 .add-button {
@@ -129,6 +137,15 @@ ul li::before {
   justify-content: flex-start;
   margin: 0.5rem 0 0;
   padding: 0 0.5rem 0.25rem;
+}
+.addListForm{
+  display: flex;
+  flex-direction: column;
+}
+
+label{
+  position: absolute;
+  left: -99999px;
 }
 /* .
 
@@ -235,4 +252,17 @@ button:hover {
   color: black;
   display: flex;
   justify-content: flex-end;
+}
+
+.deleteListButton{
+ background-color: transparent;
+ border: none;
+ padding: 0;
+ color: gray;
+}
+
+.deleteListButton:hover {
+  background-color: red;
+  border: none;
+  padding: 0
 }

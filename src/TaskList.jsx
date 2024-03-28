@@ -7,7 +7,11 @@ const TaskList = ({ title, tasks, setTasks, openModal, renderAddTask }) => {
 
   return (
     <ul className="task-list">
-      <h2 className="list-title">{title}</h2>
+      <div className="taskListHeader">
+        <h2 className="list-title">{title}</h2>
+        <button className="deleteListButton">x</button>
+      </div>
+
       {filteredTasks.map((task, index) => (
         <Task
           key={task.id}

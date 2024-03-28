@@ -3,7 +3,14 @@ import Header from "./Header";
 import ListContainer from "./ListContainer";
 import Footer from "./Footer";
 import Modal from "./Modal";
-import { Routes, Route } from "react-router-dom";
+import ModalRoute from "./ModalRoute";
+import {
+  Routes,
+  Route,
+  Navigate,
+  useNavigate,
+  useParams,
+} from "react-router-dom";
 
 function App() {
   const [tasks, setTasks] = useState(() => {
@@ -15,43 +22,41 @@ function App() {
     localStorage.setItem("tasks", JSON.stringify(tasks));
   }, [tasks]);
 
+  const navigate = useNavigate();
   const [selectedTask, setSelectedTask] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const toggleModal = (taskId) => {
+  const openModal = (taskId) => {
     const taskToEdit = tasks.find((task) => task.id === taskId);
     setSelectedTask(taskToEdit); // Set the selected task
-    setIsModalOpen(true); // Open the modal
+    navigate(`/tasks/${taskId}`); // Navigate to modal route
   };
 
   const closeModal = () => {
-    setIsModalOpen(false); // Close the modal
+    setSelectedTask(null); // Reset selected task
+    navigate("/"); // Navigate back to the list container route
   };
 
   return (
     <div className="App">
-      <Header tasks={tasks} setTasks={setTasks} />
+      <Header tasks={tasks} setTasks={setTasks} />{" "}
+      <ListContainer
+        tasks={tasks}
+        setTasks={setTasks}
+        openModal={openModal} // Pass openModal function to list container
+      />
+      {/* Route for the modal */}
       <Routes>
-        {/* Route for the list container */}
         <Route
-          path="/"
+          path="/tasks/:taskId"
           element={
-            <ListContainer
+            <ModalRoute
               tasks={tasks}
               setTasks={setTasks}
-              toggleModal={toggleModal}
+              closeModal={closeModal}
             />
           }
         />
       </Routes>
-      {isModalOpen && (
-        <Modal
-          task={selectedTask}
-          tasks={tasks}
-          setTasks={setTasks}
-          closeModal={closeModal}
-        />
-      )}
       <Footer />
     </div>
   );

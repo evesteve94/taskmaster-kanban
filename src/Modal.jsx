@@ -1,9 +1,17 @@
 import React, { useState, useEffect } from "react";
 
 const Modal = ({ task, tasks, setTasks, closeModal }) => {
-  // Initialize state for edited title and content, handle the case where task is null
-  const [editedTitle, setEditedTitle] = useState(task ? task.title : "");
-  const [editedContent, setEditedContent] = useState(task ? task.content : "");
+  // Initialize state for edited title and content
+  const [editedTitle, setEditedTitle] = useState("");
+  const [editedContent, setEditedContent] = useState("");
+
+  // Initialize editedTitle and editedContent once when task changes
+  useEffect(() => {
+    if (task) {
+      setEditedTitle(task.title);
+      setEditedContent(task.content);
+    }
+  }, [task]);
 
   useEffect(() => {
     const handleKeyDown = (e) => {
@@ -19,39 +27,42 @@ const Modal = ({ task, tasks, setTasks, closeModal }) => {
     };
   }, [closeModal]);
 
+  if (!task) {
+    return null; // If task is null, don't render anything
+  }
+
   const handleTitleChange = (e) => {
-    setEditedTitle(e.target.value);
-    updateTask({ ...task, title: e.target.value });
+    const newTitle = e.target.value;
+    setEditedTitle(newTitle);
+    updateTask({ ...task, title: newTitle });
   };
 
   const handleContentChange = (e) => {
-    setEditedContent(e.target.value);
-    updateTask({ ...task, content: e.target.value });
+    const newContent = e.target.value;
+    setEditedContent(newContent);
+    updateTask({ ...task, content: newContent });
   };
 
   const updateTask = (updatedTask) => {
-    if (!task) return; // Exit early if no task is selected
     const updatedTasks = tasks.map((t) => (t.id === task.id ? updatedTask : t));
     setTasks(updatedTasks);
   };
 
   const handleDeleteTask = () => {
-    if (!task) return; // Exit early if no task is selected
     const updatedTasks = tasks.filter((t) => t.id !== task.id);
     setTasks(updatedTasks);
     closeModal(); // Close modal after deleting task
   };
 
   const handleMoveTask = (newCategory) => {
-    const updatedTasks = [...tasks];
-    // Find the index of the task being edited
-    const taskIndex = updatedTasks.findIndex((t) => t.id === task.id);
-    // Update the category of the task
-    updatedTasks[taskIndex].category = newCategory;
-    // Update the tasks state with the modified task
+    const updatedTasks = tasks.map((t) => {
+      if (t.id === task.id) {
+        return { ...t, category: newCategory };
+      }
+      return t;
+    });
     setTasks(updatedTasks);
-    // Close the modal after moving the task
-    closeModal();
+    closeModal(); // Close modal after moving the task
   };
 
   return (
@@ -100,7 +111,7 @@ const Modal = ({ task, tasks, setTasks, closeModal }) => {
             value={editedTitle}
             onChange={handleTitleChange}
           />
-          <p className="modal-date">{task ? task.date : ""}</p>
+          <p className="modal-date">{task.date}</p>
           <textarea
             className="modal-text"
             value={editedContent}

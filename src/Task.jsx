@@ -1,9 +1,9 @@
 import React from "react";
 import { Draggable } from "react-beautiful-dnd";
 
-const Task = ({ task, toggleModal }) => {
+const Task = ({ task, openModal }) => {
   const handleTaskClick = () => {
-    toggleModal(task.id); // Send the task's ID to toggleModal function
+    openModal(task.id); // Send the task's ID to openModal function
     console.log(task.id);
   };
   return (

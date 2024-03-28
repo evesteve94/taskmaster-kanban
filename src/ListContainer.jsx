@@ -1,52 +1,37 @@
 import React from "react";
 import TaskList from "./TaskList";
+import { useState } from "react";
 
-const ListContainer = ({ tasks, setTasks, toggleModal }) => {
+const ListContainer = ({ tasks, setTasks, openModal }) => {
+  const [taskLists, setTaskLists] = useState([
+    {
+      listId: 1,
+      title: "todo",
+    },
+    {
+      listId: 2,
+      title: "doing",
+    },
+    {
+      listId: 3,
+      title: "done",
+    },
+  ]);
+
   return (
     <div className="list-container">
-      <TaskList
-        tasks={tasks}
-        setTasks={setTasks}
-        toggleModal={toggleModal}
-        title="todo"
-        renderAddTask={true} // Pass a prop to render AddTask inside TaskList
-      />
-      <TaskList
-        tasks={tasks}
-        setTasks={setTasks}
-        toggleModal={toggleModal}
-        title="doing"
-      />
-      <TaskList
-        tasks={tasks}
-        setTasks={setTasks}
-        toggleModal={toggleModal}
-        title="done"
-      />
+      {taskLists.map((taskList) => (
+        <TaskList
+          key={taskList.listId} // Provide a unique key for each TaskList
+          tasks={tasks}
+          setTasks={setTasks}
+          openModal={openModal}
+          title={taskList.title}
+          renderAddTask={taskList.title === "todo"} // Render AddTask for "todo" list only
+        />
+      ))}
     </div>
   );
 };
 
 export default ListContainer;
-
-// import React from "react";
-// import TaskList from "./TaskList";
-
-// const ListContainer = ({ tasks, setTasks, toggleModal, taskList }) => {
-//   return (
-//     <div className="list-container">
-//       {Object.values(taskList).map((list) => (
-//         <TaskList
-//           key={list.id}
-//           title={list.title}
-//           tasks={tasks}
-//           setTasks={setTasks}
-//           toggleModal={toggleModal}
-//           taskList={list}
-//         />
-//       ))}
-//     </div>
-//   );
-// };
-
-// export default ListContainer;

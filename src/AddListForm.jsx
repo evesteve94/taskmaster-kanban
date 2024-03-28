@@ -9,7 +9,7 @@ const AddListForm = ({ newList, setNewList, handleListSubmit }) => {
         type="text"
         required
         id="listTitle"
-        placeholder="Add List Title"
+        placeholder="Title"
         value={newList}
         onChange={(e) => setNewList(e.target.value)}
       />

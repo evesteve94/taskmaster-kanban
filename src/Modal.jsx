@@ -1,6 +1,19 @@
 import React, { useState, useEffect } from "react";
 
 const Modal = ({ task, tasks, setTasks, closeModal }) => {
+  // Define taskListTitles state to hold the array of task list titles
+  const [taskListTitles, setTaskListTitles] = useState([]);
+
+  // Fetch task list titles from localStorage on component mount
+  useEffect(() => {
+    const storedLists = localStorage.getItem("lists");
+    if (storedLists) {
+      const lists = JSON.parse(storedLists);
+      const titles = lists.map((list) => list.title);
+      setTaskListTitles(titles);
+    }
+  }, []);
+
   // Initialize state for edited title and content
   const [editedTitle, setEditedTitle] = useState("");
   const [editedContent, setEditedContent] = useState("");
@@ -54,13 +67,10 @@ const Modal = ({ task, tasks, setTasks, closeModal }) => {
     closeModal(); // Close modal after deleting task
   };
 
-  const handleMoveTask = (newCategory) => {
-    const updatedTasks = tasks.map((t) => {
-      if (t.id === task.id) {
-        return { ...t, category: newCategory };
-      }
-      return t;
-    });
+  const handleMoveTask = (e) => {
+    const newCategory = e.target.value;
+    const updatedTask = { ...task, category: newCategory }; // Update the category of the task
+    const updatedTasks = tasks.map((t) => (t.id === task.id ? updatedTask : t));
     setTasks(updatedTasks);
     closeModal(); // Close modal after moving the task
   };
@@ -70,35 +80,17 @@ const Modal = ({ task, tasks, setTasks, closeModal }) => {
       <div className="modal">
         <div className="modal-header">
           <p className="modal-label">{task.category}</p>
-          {/* Conditionally render buttons based on task category */}
-          {task.category === "todo" ? (
-            <>
-              <button onClick={() => handleMoveTask("doing")}>
-                Move to Doing
-              </button>
-              <button onClick={() => handleMoveTask("done")}>
-                Move to Done
-              </button>
-            </>
-          ) : task.category === "doing" ? (
-            <>
-              <button onClick={() => handleMoveTask("todo")}>
-                Move to Todo
-              </button>
-              <button onClick={() => handleMoveTask("done")}>
-                Move to Done
-              </button>
-            </>
-          ) : (
-            <>
-              <button onClick={() => handleMoveTask("todo")}>
-                Move to Todo
-              </button>
-              <button onClick={() => handleMoveTask("doing")}>
-                Move to Doing
-              </button>
-            </>
-          )}
+          {/* Render select dropdown for moving tasks */}
+          <select onChange={handleMoveTask} value="">
+            <option value="" disabled>
+              Move to
+            </option>
+            {taskListTitles.map((title) => (
+              <option key={title} value={title}>
+                {title}
+              </option>
+            ))}
+          </select>
           <span className="close-modal" onClick={closeModal}>
             x
           </span>

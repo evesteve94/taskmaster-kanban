@@ -141,6 +141,7 @@ ul li::before {
 .addListForm{
   display: flex;
   flex-direction: column;
+  min-width: 150px;
 }
 
 label{

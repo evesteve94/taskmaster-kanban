@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import TaskList from "./TaskList";
 import AddListForm from "./AddListForm";
+import { FaSquarePlus, FaSquareXmark } from "react-icons/fa6";
 
 const ListContainer = ({ tasks, setTasks, openModal }) => {
   const [taskLists, setTaskLists] = useState(() => {
@@ -79,15 +80,20 @@ const ListContainer = ({ tasks, setTasks, openModal }) => {
         />
       )}
       <button
+        className="show-form"
         onClick={() => setShowForm(!showForm)}
         style={{
-          color: "white",
-          backgroundColor: showForm ? "red" : "green",
+          // color: "white",
+          color: showForm ? "red" : "green",
           border: "none",
           cursor: "pointer",
         }}
       >
-        {showForm ? "x" : "+"}
+        {showForm ? (
+          <FaSquareXmark className="show-form" />
+        ) : (
+          <FaSquarePlus className="show-form" />
+        )}
       </button>
     </div>
   );

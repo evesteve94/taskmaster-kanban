@@ -1,4 +1,5 @@
 import React from "react";
+import { FaSquarePlus } from "react-icons/fa6";
 
 const AddListForm = ({ newList, setNewList, handleListSubmit }) => {
   return (
@@ -13,9 +14,11 @@ const AddListForm = ({ newList, setNewList, handleListSubmit }) => {
         value={newList}
         onChange={(e) => setNewList(e.target.value)}
       />
-      <button type="submit" aria-label="Add List">
-        Add List
-      </button>
+      <FaSquarePlus
+        className="add-list-button"
+        type="submit"
+        aria-label="Add List"
+      />
     </form>
   );
 };

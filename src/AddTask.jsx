@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { FaSquarePlus } from "react-icons/fa6";
 
 const AddTask = ({ tasks, setTasks }) => {
   const [newTask, setNewTask] = useState("");
@@ -50,9 +51,12 @@ const AddTask = ({ tasks, setTasks }) => {
         onChange={(e) => setNewTask(e.target.value)}
         onKeyDown={handleKeyPress}
       />
-      <button className="add-button" type="submit" aria-label="Add Task">
-        +
-      </button>
+
+      <FaSquarePlus
+        className="add-button"
+        type="submit"
+        aria-label="Add Task"
+      />
     </form>
   );
 };

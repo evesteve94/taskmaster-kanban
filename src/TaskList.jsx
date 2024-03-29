@@ -1,6 +1,7 @@
 import React from "react";
 import Task from "./Task";
 import AddTask from "./AddTask";
+import { FaSquareXmark } from "react-icons/fa6";
 
 const TaskList = ({
   title,
@@ -21,9 +22,10 @@ const TaskList = ({
     <ul className="task-list">
       <div className="taskListHeader">
         <h2 className="list-title">{title}</h2>
-        <button className="deleteListButton" onClick={handleDeleteList}>
-          x
-        </button>
+        <FaSquareXmark
+          className="deleteListButton"
+          onClick={handleDeleteList}
+        />
       </div>
 
       {filteredTasks.map((task, index) => (

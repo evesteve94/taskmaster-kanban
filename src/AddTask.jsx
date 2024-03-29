@@ -50,12 +50,14 @@ const AddTask = ({ tasks, setTasks }) => {
         value={newTask}
         onChange={(e) => setNewTask(e.target.value)}
         onKeyDown={handleKeyPress}
+        autoComplete="off"
       />
 
       <FaSquarePlus
         className="add-button"
         type="submit"
         aria-label="Add Task"
+        onClick={handleSubmit}
       />
     </form>
   );

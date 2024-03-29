@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import Header from "./Header";
 import ListContainer from "./ListContainer";
+import ListPage from "./ListPage";
 import Footer from "./Footer";
-import Modal from "./Modal";
+import InformationPage from "./InformationPage";
 import ModalRoute from "./ModalRoute";
 import {
   Routes,
@@ -39,13 +40,20 @@ function App() {
   return (
     <div className="App">
       <Header tasks={tasks} setTasks={setTasks} />{" "}
-      <ListContainer
-        tasks={tasks}
-        setTasks={setTasks}
-        openModal={openModal} // Pass openModal function to list container
-      />
-      {/* Route for the modal */}
       <Routes>
+        <Route
+          path="/"
+          element={
+            <ListContainer
+              tasks={tasks}
+              setTasks={setTasks}
+              openModal={openModal} // Pass openModal function to list container
+            />
+          }
+        />
+
+        {/* Route for the modal */}
+
         <Route
           path="/tasks/:taskId"
           element={
@@ -56,6 +64,11 @@ function App() {
             />
           }
         />
+        <Route
+          path="/Lists/:title"
+          element={<ListPage tasks={tasks} openModal={openModal} />}
+        />
+        <Route path="/info" element={<InformationPage />} />
       </Routes>
       <Footer />
     </div>

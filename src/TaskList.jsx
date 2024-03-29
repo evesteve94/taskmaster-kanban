@@ -2,6 +2,7 @@ import React from "react";
 import Task from "./Task";
 import AddTask from "./AddTask";
 import { FaSquareXmark } from "react-icons/fa6";
+import { Link } from "react-router-dom";
 
 const TaskList = ({
   title,
@@ -11,17 +12,20 @@ const TaskList = ({
   renderAddTask,
   listId,
   onDeleteList,
+  color,
 }) => {
   const filteredTasks = tasks.filter((task) => task.category === title);
 
   const handleDeleteList = () => {
-    onDeleteList(listId); // Call the onDeleteList function with the listId as an argument
+    onDeleteList(listId, title); // Call the onDeleteList function with the listId as an argument
   };
 
   return (
-    <ul className="task-list">
+    <ul className="task-list" style={{ backgroundColor: color }}>
       <div className="taskListHeader">
-        <h2 className="list-title">{title}</h2>
+        <Link to={`/Lists/${title}`} className="list-link">
+          <h2 className="list-title">{title}</h2>
+        </Link>
         <FaSquareXmark
           className="deleteListButton"
           onClick={handleDeleteList}

@@ -1,10 +1,17 @@
 import React from "react";
-import AddTask from "./AddTask";
+import { Link } from "react-router-dom";
+import { FaCircleInfo } from "react-icons/fa6";
 
 const Header = () => {
   return (
     <header>
-      <h1>Task Master</h1>
+      <Link to="/" className="header-link">
+        <h1>Task Master</h1>
+      </Link>
+      <Link to="/info" className="info-link">
+        {" "}
+        <FaCircleInfo />
+      </Link>
     </header>
   );
 };

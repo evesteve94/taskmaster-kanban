@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { FaTrashCan, FaSquareXmark } from "react-icons/fa6";
 
 const Modal = ({ task, tasks, setTasks, closeModal }) => {
   // Define taskListTitles state to hold the array of task list titles
@@ -76,45 +77,46 @@ const Modal = ({ task, tasks, setTasks, closeModal }) => {
   };
 
   return (
-    <div className="modal-overlay">
-      <div className="modal">
-        <div className="modal-header">
-          <p className="modal-label">{task.category}</p>
-          {/* Render select dropdown for moving tasks */}
-          <select onChange={handleMoveTask} value="">
-            <option value="" disabled>
-              Move to
-            </option>
-            {taskListTitles.map((title) => (
-              <option key={title} value={title}>
-                {title}
+    <main>
+      <div className="modal-overlay">
+        <div className="modal">
+          <div className="modal-header">
+            <p className="modal-label">{task.category}</p>
+            {/* Render select dropdown for moving tasks */}
+            <select onChange={handleMoveTask} value="">
+              <option value="" disabled>
+                Move to
               </option>
-            ))}
-          </select>
-          <span className="close-modal" onClick={closeModal}>
-            x
-          </span>
-        </div>
-        <form className="modal-content">
-          {" "}
-          <input
-            className="modal-title"
-            type="text"
-            value={editedTitle}
-            onChange={handleTitleChange}
-          />
-          <p className="modal-date">{task.date}</p>
-          <textarea
-            className="modal-text"
-            value={editedContent}
-            onChange={handleContentChange}
-          />
-        </form>
-        <div className="modal-footer">
-          <button onClick={handleDeleteTask}>Delete</button>
+              {taskListTitles.map((title) => (
+                <option key={title} value={title}>
+                  {title}
+                </option>
+              ))}
+            </select>
+            <FaSquareXmark className="close-modal" onClick={closeModal} />
+          </div>
+          <form className="modal-content">
+            {" "}
+            <input
+              className="modal-title"
+              type="text"
+              value={editedTitle}
+              onChange={handleTitleChange}
+            />
+            <p className="modal-date">{task.date}</p>
+            <textarea
+              className="modal-text"
+              value={editedContent}
+              onChange={handleContentChange}
+              placeholder="Type notes..."
+            />
+          </form>
+          <div className="modal-footer">
+            <FaTrashCan className="delete-task" onClick={handleDeleteTask} />
+          </div>
         </div>
       </div>
-    </div>
+    </main>
   );
 };
 

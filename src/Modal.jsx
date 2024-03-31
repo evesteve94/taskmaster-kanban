@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { FaTrashCan, FaSquareXmark } from "react-icons/fa6";
+import { DataContext } from "./DataContext";
 
-const Modal = ({ task, tasks, setTasks, closeModal }) => {
+const Modal = ({ task }) => {
+  const { tasks, setTasks, closeModal } = useContext(DataContext);
   // Define taskListTitles state to hold the array of task list titles
   const [taskListTitles, setTaskListTitles] = useState([]);
 

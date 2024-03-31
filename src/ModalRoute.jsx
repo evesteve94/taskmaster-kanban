@@ -1,7 +1,10 @@
 import { Navigate, useParams } from "react-router-dom";
 import Modal from "./Modal";
+import React, { useContext } from "react";
+import { DataContext } from "./DataContext";
 
-function ModalRoute({ tasks, setTasks, closeModal }) {
+function ModalRoute({ closeModal }) {
+  const { tasks } = useContext(DataContext);
   const { taskId } = useParams();
   const task = tasks.find((task) => task.id === parseInt(taskId)); // Convert taskId to number
 
@@ -11,14 +14,7 @@ function ModalRoute({ tasks, setTasks, closeModal }) {
     return <Navigate to="/" replace />;
   }
 
-  return (
-    <Modal
-      task={task}
-      tasks={tasks}
-      setTasks={setTasks}
-      closeModal={closeModal}
-    />
-  );
+  return <Modal task={task} closeModal={closeModal} />;
 }
 
 export default ModalRoute;

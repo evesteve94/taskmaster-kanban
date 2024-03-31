@@ -1,19 +1,13 @@
-import React from "react";
+import { useContext } from "react";
 import Task from "./Task";
 import AddTask from "./AddTask";
 import { FaSquareXmark } from "react-icons/fa6";
 import { Link } from "react-router-dom";
+import { DataContext } from "./DataContext";
 
-const TaskList = ({
-  title,
-  tasks,
-  setTasks,
-  openModal,
-  renderAddTask,
-  listId,
-  onDeleteList,
-  color,
-}) => {
+const TaskList = ({ title, listId, onDeleteList, color }) => {
+  const { tasks, setTasks } = useContext(DataContext);
+
   const filteredTasks = tasks.filter((task) => task.category === title);
 
   const handleDeleteList = () => {
@@ -32,20 +26,11 @@ const TaskList = ({
         />
       </div>
 
-      {filteredTasks.map((task, index) => (
-        <Task
-          key={task.id}
-          task={task}
-          tasks={tasks}
-          setTasks={setTasks}
-          openModal={openModal}
-          index={index}
-        />
+      {filteredTasks.map((task) => (
+        <Task key={task.id} task={task} />
       ))}
-      {/* Render AddTask component if renderAddTask is true and title is "todo" */}
-      {renderAddTask && title === "todo" && (
-        <AddTask tasks={tasks} setTasks={setTasks} />
-      )}
+      {/* Render AddTask component if title is "todo" */}
+      {title === "todo" && <AddTask tasks={tasks} setTasks={setTasks} />}
     </ul>
   );
 };

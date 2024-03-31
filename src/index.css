@@ -6,19 +6,31 @@
 
 :root {
   --main-color: rgba(209, 206, 206, 0.8); 
-  --white-color: rgba(255, 255, 255, 0.744);
-  --blue-color: rgb(225, 145, 24);
+  --white-color: rgb(255, 255, 255);
+  --blue-color: rgb(58, 152, 186);
+  --black-color: black;
 }
 
 html {
   font-size: 1.5rem;
 }
 
+
+.orbitron-font {
+  font-family: "Orbitron", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
 body {
-  font-family: "Roboto", sans-serif;
+  font-family: "Orbitron", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: rgb(255, 246, 235);
+  color: var(--black-color)
 }
+
 
 .App {
   height: 100vh;
@@ -36,10 +48,14 @@ header {
   width: 100%;
   padding: 0 0.25em;
   background-color:var(--blue-color);
+  /* background-color: rgb(211, 211, 211); */
   color: aliceblue;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  /* box-shadow: 0px 3px 0px rgba(0, 0, 0, 0.1); */
+  border-bottom-left-radius: 0.25rem;
+  border-bottom-right-radius: 0.25rem;
 }
 
 .header-link {
@@ -48,6 +64,7 @@ header {
   font-size: 1rem;
   text-decoration: none;
   color: var(--white-color);
+  letter-spacing: 0.1rem;
 }
 
 .info-link{
@@ -71,21 +88,26 @@ main {
 }
 
 .task-list {
-  border-radius: 1rem;
-  /* background-color: var(--main-color); */
+  border-radius: 0.5rem;
   min-width: 200px;
-  /* height: 700px; */
-  padding: 0.5rem;
+  max-width: 200px;
+  /* height: fit-content; */
+  min-height: 100%;
+  padding: 0rem;
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1);
+  overflow-y: auto; /* Enable vertical scrolling */
 }
+
 
 footer {
   width: 100%;
-  padding: 0.25em;
+  padding: 0.75rem;
   background-color:var(--blue-color);
   color: aliceblue;
   display: grid;
   place-content: center;
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
 }
 
 ul {
@@ -103,27 +125,35 @@ ul li::before {
   display: flex;
   justify-content: space-between;
   width: 100%;
+  background-color:var(--blue-color);
+  border-top-right-radius: 0.5rem;
+  border-top-left-radius: 0.5rem;
+  padding: 0.25rem;
 }
 
 .list-title{
   text-align: center;
-  font-size: 1rem;
-  text-transform: uppercase;
+  font-size: 1.2rem;
+  text-transform: capitalize;
   /* margin-left: 2.5rem; */
   width: 100%;
-  font-family: monospace;
+  font-family: "Orbitron", sans-serif;
+  color: var(--white-color)
+}
+
+.list-title:hover{
+  cursor: pointer;
+  transform: scale(1.1);
+  transition-duration: 0.7s;
 }
 
 .task{
-  background-color: var(--white-color);
+  background-color: white;
   border-radius: 0.25rem;
-  margin-top: 0.5rem;
-  width: 100%;
+  margin: 0.5rem;
+  width: auto;
   padding: 0.5rem;
-}
-
-.task:hover{
-  cursor: pointer;
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1);
 }
 
 .task-title{
@@ -131,6 +161,18 @@ ul li::before {
   margin-bottom: 0.5rem;
   margin-top: 0;
   text-align: left;
+  cursor: pointer;
+}
+
+.task-title:hover{
+  transform: scale(1.075);
+  transition-duration: 0.7s;
+}
+
+
+.task-header {
+  display: flex;
+  justify-content: space-between;
 }
 
 .task-date{
@@ -146,6 +188,14 @@ ul li::before {
   padding: 0 0.5rem;
   border-radius: 0.25rem;
   font-size: 0.8rem;
+  background-color: var(--blue-color);
+  color: var(--white-color);
+  border: none;
+}
+
+.add-input::placeholder,
+.list-input::placeholder{
+  color: var(--white-color)
 }
 
 .add-button {
@@ -212,7 +262,7 @@ label{
   background-color: var(--blue-color);
   padding: 0.5rem;
   border-radius: 0.25rem;
-  color: white;
+  color: var(--white-color);
   text-transform: uppercase;
   font-family: monospace;
 }
@@ -221,7 +271,7 @@ select {
   background-color: var(--blue-color);
   border-radius: 0.25rem;
   border: none;
-  color: white;
+  color:var(--white-color);
   font-size: 0.8rem;
   text-transform: uppercase;
   font-family: monospace;
@@ -265,6 +315,9 @@ select {
   justify-content: flex-end;
   height: 1.5rem;
 }
+.close-modal:hover{
+  color: red
+}
 
 .modal-footer{
   display: flex;
@@ -275,11 +328,15 @@ select {
   cursor: pointer;
 }
 
+.delete-task:hover{
+  color: red;
+}
+
 .deleteListButton{
  background-color: transparent;
  border: none;
  padding: 0;
- color: var(--blue-color);
+ color: var(--white-color);
 }
 
 .deleteListButton:hover {
@@ -298,9 +355,16 @@ color: red;
 .add-list-button{
   color: var(--blue-color);
   margin-left: 0.25rem;
+  font-size: 2rem;
+  padding: 0;
+  margin-top: -0.4rem;
 }
 .add-list-button:hover{
   color: green;
+}
+
+.list-color {
+  margin-left: 0.25rem;
 }
 
 .list-link{
@@ -311,7 +375,7 @@ color: red;
 
 .page-title{
   text-transform: uppercase;
-  font-family: monospace;
+  font-family: "Orbitron", sans-serif;
   width: 100%;
   text-align: center;
 }
@@ -333,12 +397,14 @@ color: red;
 }
 
 .list-tasks .task{
-  max-width: 200px;
-  height: 100px;
+  max-width: 175px;
+  min-width: 175px;
+  height: 120px;
   background-color: var(--white-color);
   border-radius: 0.25rem;
-  margin-top: 0.5rem;
+  /* margin-top: 0.5rem; */
   padding: 0.5rem;
+  margin: 0;
 }
 
 .page-header{
@@ -351,9 +417,7 @@ color: red;
 }
 
 .back-arrow:hover,
-.info-link:hover,
-.delete-task:hover,
-.close-modal:hover{
+.info-link:hover{
   transform: scale(1.15);
   transition-duration: 0.5s;
 }
@@ -361,4 +425,50 @@ color: red;
 footer {
   color: var(--white-color);
   font-size: 0.8rem;
+}
+
+.info-container{
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.theme-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  background-color: var(--main-color);
+  border-radius: 0.5rem;
+}
+
+.color-div {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.ColorPicker {
+  width: 150px;
+  height: 100px;
+}
+
+.theme-container p {
+  width: 100px;
+}
+
+.theme-container .task {
+  list-style: none;
+  width: 200px;
+}
+
+.reset-colors {
+  padding: 0.5rem;
+  border: none;
+  border-radius: 0.25rem;
+  font-size: 1.2rem;
+  color: var(--white-color);
+  background-color: var(--blue-color);
+  cursor: pointer;
 }

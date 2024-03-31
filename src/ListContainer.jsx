@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import TaskList from "./TaskList";
 import AddListForm from "./AddListForm";
 import { FaSquarePlus, FaSquareXmark } from "react-icons/fa6";
+import { DataContext } from "./DataContext";
 
-const ListContainer = ({ tasks, setTasks, openModal }) => {
+const ListContainer = () => {
+  const { tasks, setTasks } = useContext(DataContext);
   const [taskLists, setTaskLists] = useState(() => {
     const storedLists = localStorage.getItem("lists");
     return storedLists
@@ -12,17 +14,17 @@ const ListContainer = ({ tasks, setTasks, openModal }) => {
           {
             listId: 1,
             title: "todo",
-            color: "rgb(255, 156, 84, 0.9)",
+            color: "rgb(211, 211, 211, 0.9)",
           },
           {
             listId: 2,
             title: "doing",
-            color: "rgb(255, 171, 134, 0.9)",
+            color: "rgb(211, 211, 211, 0.9)",
           },
           {
             listId: 3,
             title: "done",
-            color: "rgb(255, 192, 184, 0.9)",
+            color: "rgb(211, 211, 211, 0.9)",
           },
         ];
   });
@@ -31,31 +33,7 @@ const ListContainer = ({ tasks, setTasks, openModal }) => {
     localStorage.setItem("lists", JSON.stringify(taskLists));
   }, [taskLists]);
 
-  const [newList, setNewList] = useState("");
   const [showForm, setShowForm] = useState(false);
-  const [color, setColor] = useState("#000000"); // Initialize with black color
-
-  const handleListSubmit = (e) => {
-    e.preventDefault();
-    if (!newList) return;
-    addList(newList, color); // Pass the selected color to addList
-    setNewList("");
-    setShowForm(false);
-  };
-
-  const addList = (listTitle, listColor) => {
-    const id = taskLists.length + 1;
-    const newList = {
-      listId: id,
-      title: listTitle,
-      color: listColor, // Set the color of the new list
-    };
-    setTaskLists((prevLists) => {
-      const updatedLists = [...prevLists, newList];
-      localStorage.setItem("lists", JSON.stringify(updatedLists));
-      return updatedLists;
-    });
-  };
 
   const onDeleteList = (listIdToDelete, listCategory) => {
     setTaskLists((prevLists) => {
@@ -89,9 +67,6 @@ const ListContainer = ({ tasks, setTasks, openModal }) => {
       {taskLists.map((taskList) => (
         <TaskList
           key={taskList.listId}
-          tasks={tasks}
-          setTasks={setTasks}
-          openModal={openModal}
           title={taskList.title}
           renderAddTask={taskList.title === "todo"}
           listId={taskList.listId}
@@ -101,11 +76,9 @@ const ListContainer = ({ tasks, setTasks, openModal }) => {
       ))}
       {showForm && (
         <AddListForm
-          newList={newList}
-          setNewList={setNewList}
-          handleListSubmit={handleListSubmit}
-          color={color}
-          setColor={setColor}
+          taskLists={taskLists}
+          setTaskLists={setTaskLists}
+          setShowForm={setShowForm}
         />
       )}
       <button

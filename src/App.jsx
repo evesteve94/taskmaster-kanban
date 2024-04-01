@@ -10,6 +10,7 @@ import { Routes, Route } from "react-router-dom";
 import { DataProvider } from "./DataContext";
 
 function App() {
+  // localStorage.clear();
   return (
     <div className="App">
       <Header />{" "}

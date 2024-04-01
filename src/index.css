@@ -46,7 +46,7 @@ body {
 
 header {
   width: 100%;
-  padding: 0 0.25em;
+  padding: 0.5em;
   background-color:var(--blue-color);
   /* background-color: rgb(211, 211, 211); */
   color: aliceblue;
@@ -95,7 +95,7 @@ main {
   min-height: 100%;
   padding: 0rem;
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1);
-  overflow-y: auto; /* Enable vertical scrolling */
+  overflow-y: auto; 
 }
 
 
@@ -144,7 +144,7 @@ ul li::before {
 .list-title:hover{
   cursor: pointer;
   transform: scale(1.1);
-  transition-duration: 0.7s;
+  transition-duration: 0.5s;
 }
 
 .task{
@@ -154,10 +154,14 @@ ul li::before {
   width: auto;
   padding: 0.5rem;
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1);
+  font-family: "Roboto", sans-serif;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
 }
 
 .task-title{
-  font-size: 1rem;
+  font-size: 20px;
   margin-bottom: 0.5rem;
   margin-top: 0;
   text-align: left;
@@ -173,6 +177,7 @@ ul li::before {
 .task-header {
   display: flex;
   justify-content: space-between;
+  margin: 0;
 }
 
 .task-date{
@@ -326,6 +331,7 @@ select {
 .delete-task {
   color: var(--blue-color);
   cursor: pointer;
+  font-size: 20px;
 }
 
 .delete-task:hover{
@@ -348,7 +354,7 @@ color: red;
 .show-form{
   height: 1.5rem;
   width: 1.5rem;
-  background-color: var(--white-color);
+  /* background-color: var(--white-color); */
   padding: none;
 }
 
@@ -378,6 +384,7 @@ color: red;
   font-family: "Orbitron", sans-serif;
   width: 100%;
   text-align: center;
+  color: var(--blue-color);
 }
 
 .task-list-page,
@@ -387,6 +394,7 @@ color: red;
   background-color: var(--main-color);
   border-radius: 0.5rem;
   padding: 0.5rem;
+  overflow-y: auto; 
 }
 
 .list-tasks {
@@ -433,6 +441,22 @@ footer {
   gap: 0.5rem;
 }
 
+.info-container h3, .blue-symbol {
+  color: var(--blue-color);
+}
+
+.blue-symbol{
+  font-size: 1rem;
+  margin-right: 0.25rem;
+}
+
+.info-container p {
+  font-family: "Roboto", sans-serif;
+  font-size: 18px;
+  text-align: left;
+  line-height: 1.5;
+}
+
 .theme-container{
   display: flex;
   flex-direction: column;
@@ -442,6 +466,8 @@ footer {
   padding: 0.5rem;
   background-color: var(--main-color);
   border-radius: 0.5rem;
+  overflow-y: auto; 
+  width: 350px;
 }
 
 .color-div {
@@ -450,7 +476,7 @@ footer {
 }
 
 .ColorPicker {
-  width: 150px;
+  width: 120px;
   height: 100px;
 }
 

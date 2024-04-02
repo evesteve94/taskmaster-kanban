@@ -19,7 +19,6 @@ const ListPage = () => {
 
   // Update local storage when color changes
   useEffect(() => {
-    // Update the color for the specific list in local storage
     const storedLists = localStorage.getItem("lists");
     const parsedLists = storedLists ? JSON.parse(storedLists) : [];
     const updatedLists = parsedLists.map((list) =>

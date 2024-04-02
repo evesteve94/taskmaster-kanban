@@ -23,9 +23,9 @@ const Task = ({ task }) => {
     <li className="task" draggable onDragStart={handleDragStart}>
       <div className="task-header" onClick={handleTaskClick}>
         <h4 className="task-title">{task.title}</h4>
-        <FaTrashCan className="delete-task" onClick={handleDeleteTask} />
+        <p className="task-date">{task.date}</p>
       </div>
-      <p className="task-date">{task.date}</p>
+      <FaTrashCan className="delete-task" onClick={handleDeleteTask} />
     </li>
   );
 };

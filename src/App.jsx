@@ -6,6 +6,7 @@ import Footer from "./Footer";
 import InformationPage from "./InformationPage";
 import ModalRoute from "./ModalRoute";
 import SettingsPage from "./SettingsPage";
+import MissingPage from "./MissingPage";
 import { Routes, Route } from "react-router-dom";
 
 //context
@@ -36,6 +37,7 @@ function App() {
             path="/settings"
             element={<SettingsPage setBackgroundImage={setBackgroundImage} />}
           />
+          <Route path="*" element={<MissingPage />} />
         </Routes>
       </DataProvider>
       <Footer />

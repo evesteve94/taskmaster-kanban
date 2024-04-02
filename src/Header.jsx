@@ -6,7 +6,14 @@ const Header = () => {
   return (
     <header>
       <Link to="/" className="header-link">
-        <h1>Task Master</h1>
+        <h1>
+          <img
+            src="https://assets.dryicons.com/uploads/icon/svg/6151/c3284fd3-44bf-404f-bd38-344c5b34da6c.svg"
+            alt="Task Master SVG Logo"
+            className="logo"
+          />
+          Task Master{" "}
+        </h1>
       </Link>
       <nav>
         <Link to="/info" className="info-link">

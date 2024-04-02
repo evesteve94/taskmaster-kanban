@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { FaTrashCan } from "react-icons/fa6";
 import { DataContext } from "./DataContext";
 
@@ -15,8 +15,12 @@ const Task = ({ task }) => {
     setTasks(updatedTasks);
   };
 
+  const handleDragStart = (e) => {
+    e.dataTransfer.setData("text/plain", JSON.stringify(task));
+  };
+
   return (
-    <li className="task">
+    <li className="task" draggable onDragStart={handleDragStart}>
       <div className="task-header" onClick={handleTaskClick}>
         <h4 className="task-title">{task.title}</h4>
         <FaTrashCan className="delete-task" onClick={handleDeleteTask} />

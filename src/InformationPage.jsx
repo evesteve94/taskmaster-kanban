@@ -4,6 +4,9 @@ import {
   FaTrashCan,
   FaGear,
   FaSquareXmark,
+  FaImage,
+  FaArrowRotateLeft,
+  FaArrowsLeftRightToLine,
 } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 
@@ -19,6 +22,12 @@ const InformationPage = () => {
           <h2 className="page-title">About Task Master</h2>
         </div>
         <h3>The Project</h3>
+        <p>
+          Task Master is a feature-rich task management application built with
+          React. Seamlessly manage your tasks and lists, customize colors, and
+          enjoy a seamless single-page application experience. Stay organized
+          with Task Master.
+        </p>
         <p>
           Task Master was developed as an assigment for my course in React at
           Chas Academy. The goal was to implement as many React features as
@@ -36,8 +45,13 @@ const InformationPage = () => {
         <h3>Tasks</h3>
         <p>
           <FaSquarePlus className="blue-symbol" />
-          To create a new task, simply type the Title into the input in the TODO
+          To create a new task, simply type the Title into the input in the Todo
           List.
+        </p>
+        <p>
+          <FaArrowsLeftRightToLine className="blue-symbol" />
+          To move a task betwteen lists, you can drag and drop the card from one
+          list to another, it's that easy!
         </p>
         <p>
           <FaGear className="blue-symbol" /> To change the title and content, or
@@ -62,6 +76,24 @@ const InformationPage = () => {
         <p>
           <FaSquareXmark className="blue-symbol" /> To delete a list, click the
           X in the top right corner.
+        </p>
+        <h3>Themes</h3>
+
+        <p>
+          <FaGear className="blue-symbol" /> You can change the color theme of
+          the main, detail and text color on the settings page here:{" "}
+          <Link to="/settings">
+            <FaGear className="blue-symbol" />
+          </Link>
+        </p>
+        <p>
+          <FaImage className="blue-symbol" /> The background image can be
+          customized! By entering a keyword the Task Master will fetch an image
+          from Unsplash!
+        </p>
+        <p>
+          <FaArrowRotateLeft className="blue-symbol" /> To reset the theme or
+          background, simply click the buttons in the settings page.
         </p>
       </div>
     </main>

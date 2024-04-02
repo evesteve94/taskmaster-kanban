@@ -1,12 +1,13 @@
-import React, { useContext } from "react";
+import { useContext, useState } from "react";
 import ColorPicker from "./ColorPicker";
 import { DataContext } from "./DataContext";
 import Task from "./Task";
-import { FaAnglesLeft } from "react-icons/fa6";
+import { FaAnglesLeft, FaImages } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 
-const SettingsPage = () => {
+const SettingsPage = ({ setBackgroundImage }) => {
   const { colors, setColors, tasks } = useContext(DataContext);
+  const [keyword, setKeyword] = useState("");
 
   const handleColorChange = (colorName, newColor) => {
     const updatedColors = { ...colors, [colorName]: newColor };
@@ -32,6 +33,35 @@ const SettingsPage = () => {
     category: "todo",
     isOpen: false,
   };
+
+  const handleKeywordChange = (e) => {
+    setKeyword(e.target.value);
+  };
+
+  const handleSubmit = (e) => {
+    const accessKey = "eoMgFXTBy9LPZhjnApA_Ec4ulny7fTHdwjUt4cu7XqE";
+    const apiUrl = `https://api.unsplash.com/photos/random?query=${keyword}&client_id=${accessKey}`;
+
+    e.preventDefault();
+    // Fetch image from Unsplash API based on keyword
+    fetch(apiUrl)
+      .then((response) => response.json())
+      .then((data) => {
+        const imageUrl = data.urls.regular;
+        setBackgroundImage(imageUrl);
+        localStorage.setItem("backgroundImage", imageUrl);
+      })
+      .catch((error) => {
+        console.error("Error fetching image:", error);
+      });
+    setKeyword("");
+  };
+
+  const handleResetBackground = () => {
+    setBackgroundImage("");
+    localStorage.removeItem("backgroundImage");
+  };
+
   return (
     <main>
       <div className="theme-container">
@@ -101,6 +131,26 @@ const SettingsPage = () => {
           {exampleTask && <Task key={exampleTask.id} task={exampleTask} />}
           <button className="reset-colors" onClick={resetColors}>
             Reset Colors
+          </button>{" "}
+          <form className="background-form" onSubmit={handleSubmit}>
+            <h4>Change Background</h4>
+            <label htmlFor="keywordInput">Enter a keyword:</label>
+            <input
+              className="add-input"
+              type="text"
+              id="keywordInput"
+              value={keyword}
+              onChange={handleKeywordChange}
+              autoComplete="off"
+              placeholder="Type a keyword + enter"
+            />{" "}
+          </form>
+          <button
+            className="reset-background"
+            onClick={handleResetBackground}
+            style={{ marginTop: "0.5rem" }}
+          >
+            Remove Background
           </button>
         </div>
       </div>

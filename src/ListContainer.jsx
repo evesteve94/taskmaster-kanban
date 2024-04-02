@@ -14,17 +14,17 @@ const ListContainer = () => {
           {
             listId: 1,
             title: "todo",
-            color: "rgb(211, 211, 211, 0.9)",
+            color: "rgba(209, 206, 206, 0.658)",
           },
           {
             listId: 2,
             title: "doing",
-            color: "rgb(211, 211, 211, 0.9)",
+            color: "rgba(209, 206, 206, 0.658)",
           },
           {
             listId: 3,
             title: "done",
-            color: "rgb(211, 211, 211, 0.9)",
+            color: "rgba(209, 206, 206, 0.658)",
           },
         ];
   });

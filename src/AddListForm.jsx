@@ -47,6 +47,7 @@ const AddListForm = ({ taskLists, setTaskLists, setShowForm }) => {
       <label htmlFor="listColor">Color</label>
       <input
         className="list-color"
+        required
         type="color"
         id="listColor"
         value={color}

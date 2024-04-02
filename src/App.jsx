@@ -4,6 +4,7 @@ import ListPage from "./ListPage";
 import Footer from "./Footer";
 import InformationPage from "./InformationPage";
 import ModalRoute from "./ModalRoute";
+import SettingsPage from "./SettingsPage";
 import { Routes, Route } from "react-router-dom";
 
 //context
@@ -23,6 +24,7 @@ function App() {
           <Route path="/tasks/:taskId" element={<ModalRoute />} />
           <Route path="/Lists/:title" element={<ListPage />} />
           <Route path="/info" element={<InformationPage />} />
+          <Route path="/settings" element={<SettingsPage />} />
         </Routes>
       </DataProvider>
       <Footer />

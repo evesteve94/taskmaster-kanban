@@ -8,7 +8,7 @@
     --main-color: rgba(209, 206, 206, 0.8); 
     --white-color: rgb(255, 255, 255);
     --blue-color: rgb(58, 152, 186);
-    --black-color: black;
+    --black-color: rgb(0, 0, 5);
   }
   
   html {
@@ -61,15 +61,22 @@
   .header-link {
     width: 100%;
     text-align: center;
-    font-size: 1rem;
+    font-size: 0.8rem;
     text-decoration: none;
     color: var(--white-color);
     letter-spacing: 0.1rem;
+  }
+
+  nav {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
   }
   
   .info-link{
     color: var(--white-color);
     margin-right: 0.5rem;
+    margin-top: 0.5rem;
   }
   
   
@@ -107,11 +114,13 @@
   
   .list-color {
     margin-left: 0.25rem;
+    height: 50px;
+    width: 50px;
   }
   
   .list-link{
     text-decoration: none;
-    color: black;
+    color: var(--black-color);
     cursor: pointer;
   }
   
@@ -196,6 +205,7 @@
     text-align: left;
     cursor: pointer;
     text-decoration: none;
+    color: var(--black-color);
   }
   
   .task-title:hover{
@@ -229,6 +239,7 @@
     font-size: 0.7rem;
     font-style: italic;
     text-align: left;
+    font-family: "Roboto", sans-serif;
   }
   
   .add-input,
@@ -333,7 +344,7 @@
     margin: 1rem 0rem;
     font-style: italic;
     font-size: 0.8rem;
-  
+    font-family: "Roboto", sans-serif;
   }
   
   .modal-content{
@@ -383,10 +394,10 @@
   .addListForm{
     display: flex;
     justify-content: center;
-    align-items: start;
+    /* align-items: start; */
     /* flex-direction: column; */
     min-width: 150px;
-    max-width: 150px;
+    max-width: 200px;
   }
 
   /*PAGES PAGES PAGES*/
@@ -431,6 +442,7 @@
   
   .page-header{
     display: flex;
+    justify-content: space-between
   }
   
   .back-arrow{
@@ -478,7 +490,12 @@
     border-radius: 0.5rem;
     overflow-y: auto; 
     width: 100%;
-    /* width: 350px; */
+  }
+
+  .color-container{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
   }
   
   .color-div {
@@ -522,25 +539,85 @@
     border-top-left-radius: 0.5rem;
     border-top-right-radius: 0.5rem;
   }
-  
 
-  @media only screen and (min-width: 600px) and (max-width: 1024px) {
+  /* p {
+    color: var(--black-color);
+  }
+   */
+
+  @media only screen and (min-width: 600px) {
+    .header-link{
+        font-size: 1rem;
+    }
+
     .list-container, main {
         flex-direction: row;
         align-items: start;
         padding: 0.5rem;
+        margin: 0;
     }
 
     .modal {
         width: 90%;
     }
 
-    .info-container{
+    .info-container,
+    .task-list{
         overflow-y: auto; 
         height: 100%;
     }
 
     .theme-container{
         height: 100%;
+        align-items: normal;
     }
+
+
+    .color-container{
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    .example-container{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .list-tasks .task{
+        max-width: 220px;
+        min-width: 220px;
+        height: 150px;
+        background-color: var(--white-color);
+        border-radius: 0.25rem;
+        /* margin-top: 0.5rem; */
+        padding: 0.5rem;
+        margin: 0;
+      }
+  }
+
+  @media only screen and (min-width: 1000px) {
+    .task-list{
+        min-width: 200px;
+        max-width: 200px;
+    }
+
+    .task-title {
+        font-size: 20px;
+    }
+
+    .delete-task{
+        font-size: 20px;
+    }
+
+    .add-button{
+        font-size: 48px;
+    }
+
+    .modal{
+        max-width: 1000px ;
+        max-height: 80vh;
+    }
+
   }

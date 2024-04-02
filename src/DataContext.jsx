@@ -15,7 +15,7 @@ export const DataProvider = ({ children }) => {
     return storedColors
       ? JSON.parse(storedColors)
       : {
-          blackColor: "rgba(209, 206, 206, 0.8)",
+          blackColor: "rgba(0, 0, 0)",
           whiteColor: "rgb(255, 255, 255)",
           blueColor: "rgb(58, 152, 186)",
         };

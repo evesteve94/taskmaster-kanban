@@ -1,5 +1,7 @@
 # Task Master - by evesteve
 
+[Deployed website](https://task-master-evesteve.netlify.app/)
+
 ## The Project
 
 - Task Master is a feature-rich task management application built with
@@ -44,5 +46,3 @@
 - Context API
 - LocalStorage API
 - CSS
-
-[Deployed website](https://www.example.com)

@@ -1,4 +1,4 @@
-# ![Task Master Logo](https://assets.dryicons.com/uploads/icon/svg/6151/c3284fd3-44bf-404f-bd38-344c5b34da6c.svg) Task Master - by evesteve
+# Task Master - by evesteve
 
 ## The Project
 

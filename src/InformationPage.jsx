@@ -7,6 +7,7 @@ import {
   FaImage,
   FaArrowRotateLeft,
   FaArrowsLeftRightToLine,
+  FaCircleExclamation,
 } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 
@@ -57,6 +58,10 @@ const InformationPage = () => {
           <FaGear className="blue-symbol" /> To change the title and content, or
           move location of the task, click the title of the task and make your
           changes in the pop-up window.
+        </p>
+        <p>
+          <FaCircleExclamation className="blue-symbol" /> Got a task that just
+          can't wait? Mark it as urgent!
         </p>
         <p>
           <FaTrashCan className="blue-symbol" /> To delete a task click the

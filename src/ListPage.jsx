@@ -29,7 +29,14 @@ const ListPage = () => {
 
   // Handle color change
   const handleListColorChange = (e) => {
-    setListColor(e.target.value);
+    const rgbaColor = `rgba(${parseInt(
+      e.target.value.slice(1, 3),
+      16
+    )}, ${parseInt(e.target.value.slice(3, 5), 16)}, ${parseInt(
+      e.target.value.slice(5, 7),
+      16
+    )}, 0.658)`;
+    setListColor(rgbaColor);
   };
 
   // Filter tasks based on the category (title) matching the list title

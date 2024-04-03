@@ -26,6 +26,7 @@ const AddTask = ({ tasks, setTasks }) => {
       content: "",
       date: currentDate,
       category: "todo",
+      isUrgent: false,
     };
     // Update tasks state using the callback form of setTasks
     setTasks((prevTasks) => {

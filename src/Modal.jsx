@@ -1,5 +1,9 @@
 import React, { useState, useEffect, useContext } from "react";
-import { FaTrashCan, FaSquareXmark } from "react-icons/fa6";
+import {
+  FaTrashCan,
+  FaSquareXmark,
+  FaCircleExclamation,
+} from "react-icons/fa6";
 import { DataContext } from "./DataContext";
 
 const Modal = ({ task }) => {
@@ -78,12 +82,18 @@ const Modal = ({ task }) => {
     closeModal(); // Close modal after moving the task
   };
 
+  const handleToggleUrgent = () => {
+    const updatedTask = { ...task, isUrgent: !task.isUrgent };
+    updateTask(updatedTask);
+  };
+
   return (
     <main>
       <div className="modal-overlay">
         <div className="modal">
           <div className="modal-header">
             <p className="modal-label">{task.category}</p>
+
             {/* Render select dropdown for moving tasks */}
             <select onChange={handleMoveTask} value="">
               <option value="" disabled>
@@ -97,6 +107,10 @@ const Modal = ({ task }) => {
             </select>
             <FaSquareXmark className="close-modal" onClick={closeModal} />
           </div>
+          <FaCircleExclamation
+            className={task.isUrgent ? "urgent" : "notUrgent"}
+            onClick={handleToggleUrgent}
+          />
           <form className="modal-content">
             {" "}
             <input

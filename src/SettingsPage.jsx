@@ -17,9 +17,9 @@ const SettingsPage = ({ setBackgroundImage }) => {
 
   const resetColors = () => {
     const originalColors = {
-      blackColor: "rgba(0, 0, 5)",
-      whiteColor: "rgb(255, 255, 255)",
-      blueColor: "rgb(58, 152, 186)",
+      blackColor: "000005",
+      whiteColor: "#ffffff",
+      blueColor: "#3a98ba",
     };
     setColors(originalColors);
     localStorage.setItem("colors", JSON.stringify(originalColors));

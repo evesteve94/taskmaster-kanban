@@ -1,9 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { FaSquarePlus } from "react-icons/fa6";
+import { DataContext } from "./context/DataContext";
 
-const AddTask = ({ tasks, setTasks }) => {
+const AddTask = () => {
+  const { tasks, setTasks } = useContext(DataContext);
+  //state för newTask
   const [newTask, setNewTask] = useState("");
 
+  //anropar addTask, nollställer newTask
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!newTask) return;
@@ -11,15 +15,17 @@ const AddTask = ({ tasks, setTasks }) => {
     setNewTask("");
   };
 
+  //hanterar 'enter' för användarvänlighet
   const handleKeyPress = (e) => {
     if (e.key === "Enter") {
       handleSubmit(e);
     }
   };
 
+  //skapar ny instans av task med nycklar och värden
   const addTask = (taskTitle) => {
     const currentDate = new Date().toLocaleDateString();
-    const id = tasks.length + 1; // Simple way to generate unique IDs
+    const id = tasks.length + 1; // generar id
     const task = {
       id,
       title: taskTitle,
@@ -28,7 +34,7 @@ const AddTask = ({ tasks, setTasks }) => {
       category: "todo",
       isUrgent: false,
     };
-    // Update tasks state using the callback form of setTasks
+    // uppdaterar array och localStorage
     setTasks((prevTasks) => {
       const updatedTasks = [...prevTasks, task];
       // Update localStorage immediately after updating tasks state

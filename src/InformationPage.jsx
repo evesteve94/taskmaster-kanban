@@ -17,6 +17,7 @@ const InformationPage = () => {
       <div className="info-container">
         <div className="page-header">
           {" "}
+          {/* länkar tillbaka till index */}
           <Link to="/" className="back-arrow">
             <FaAnglesLeft className="blue-symbol" />
           </Link>

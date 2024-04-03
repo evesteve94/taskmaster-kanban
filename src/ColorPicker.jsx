@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
-import { DataContext } from "./DataContext";
+import { DataContext } from "./context/DataContext";
 
 const ColorPicker = ({ colorName, onChange }) => {
   const { colors } = useContext(DataContext);
-  const currentColor = colors[colorName]; // Get the current color based on the colorName
+  const currentColor = colors[colorName];
 
   const handleColorChange = (e) => {
     const newColor = e.target.value;

@@ -4,14 +4,17 @@ import {
   FaSquareXmark,
   FaCircleExclamation,
 } from "react-icons/fa6";
-import { DataContext } from "./DataContext";
+import { DataContext } from "./context/DataContext";
 
 const Modal = ({ task }) => {
   const { tasks, setTasks, closeModal } = useContext(DataContext);
-  // Define taskListTitles state to hold the array of task list titles
-  const [taskListTitles, setTaskListTitles] = useState([]);
 
-  // Fetch task list titles from localStorage on component mount
+  //states
+  const [taskListTitles, setTaskListTitles] = useState([]);
+  const [editedTitle, setEditedTitle] = useState("");
+  const [editedContent, setEditedContent] = useState("");
+
+  //hämtar alla titlar + uppdaterar innehåll dynamiskt utan en spara-knapp
   useEffect(() => {
     const storedLists = localStorage.getItem("lists");
     if (storedLists) {
@@ -19,69 +22,62 @@ const Modal = ({ task }) => {
       const titles = lists.map((list) => list.title);
       setTaskListTitles(titles);
     }
-  }, []);
-
-  // Initialize state for edited title and content
-  const [editedTitle, setEditedTitle] = useState("");
-  const [editedContent, setEditedContent] = useState("");
-
-  // Initialize editedTitle and editedContent once when task changes
-  useEffect(() => {
     if (task) {
       setEditedTitle(task.title);
       setEditedContent(task.content);
     }
   }, [task]);
 
+  //stäger modalen vid 'enter'
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.key === "Enter") {
         closeModal();
       }
     };
-
     document.addEventListener("keydown", handleKeyDown);
-
     return () => {
       document.removeEventListener("keydown", handleKeyDown);
     };
   }, [closeModal]);
 
-  if (!task) {
-    return null; // If task is null, don't render anything
-  }
-
+  //ändring av titel
   const handleTitleChange = (e) => {
     const newTitle = e.target.value;
     setEditedTitle(newTitle);
     updateTask({ ...task, title: newTitle });
   };
 
+  //ändring av innehåll
   const handleContentChange = (e) => {
     const newContent = e.target.value;
     setEditedContent(newContent);
     updateTask({ ...task, content: newContent });
   };
 
+  //uppdaterar task baserat på id
   const updateTask = (updatedTask) => {
     const updatedTasks = tasks.map((t) => (t.id === task.id ? updatedTask : t));
     setTasks(updatedTasks);
   };
 
+  //raderar task baserat på id
   const handleDeleteTask = () => {
     const updatedTasks = tasks.filter((t) => t.id !== task.id);
     setTasks(updatedTasks);
-    closeModal(); // Close modal after deleting task
+    closeModal();
   };
 
+  //flyttar task baserat på titel
   const handleMoveTask = (e) => {
     const newCategory = e.target.value;
-    const updatedTask = { ...task, category: newCategory }; // Update the category of the task
+    const updatedTask = { ...task, category: newCategory };
     const updatedTasks = tasks.map((t) => (t.id === task.id ? updatedTask : t));
     setTasks(updatedTasks);
-    closeModal(); // Close modal after moving the task
+    closeModal();
   };
 
+  //växlar isurgent
   const handleToggleUrgent = () => {
     const updatedTask = { ...task, isUrgent: !task.isUrgent };
     updateTask(updatedTask);
@@ -93,8 +89,6 @@ const Modal = ({ task }) => {
         <div className="modal">
           <div className="modal-header">
             <p className="modal-label">{task.category}</p>
-
-            {/* Render select dropdown for moving tasks */}
             <select onChange={handleMoveTask} value="">
               <option value="" disabled>
                 Move to
@@ -112,7 +106,6 @@ const Modal = ({ task }) => {
             onClick={handleToggleUrgent}
           />
           <form className="modal-content">
-            {" "}
             <input
               className="modal-title"
               type="text"

@@ -2,10 +2,11 @@ import React, { useEffect, useState, useContext } from "react";
 import TaskList from "./TaskList";
 import AddListForm from "./AddListForm";
 import { FaSquarePlus, FaSquareXmark } from "react-icons/fa6";
-import { DataContext } from "./DataContext";
+import { DataContext } from "./context/DataContext";
 
 const ListContainer = () => {
   const { tasks, setTasks } = useContext(DataContext);
+  //hook för listor - skapar tre st som default
   const [taskLists, setTaskLists] = useState(() => {
     const storedLists = localStorage.getItem("lists");
     return storedLists
@@ -29,25 +30,28 @@ const ListContainer = () => {
         ];
   });
 
+  //hanterar/sparar alla förändingar av listor
   useEffect(() => {
     localStorage.setItem("lists", JSON.stringify(taskLists));
   }, [taskLists]);
 
+  //hook för att toggle AddListForm
   const [showForm, setShowForm] = useState(false);
 
+  //raderar listan och flyttar dens tasks till todo
   const onDeleteList = (listIdToDelete, listCategory) => {
     setTaskLists((prevLists) => {
-      // Filter out the list to be deleted
+      // Filtrear ut listan som ska raderas
       const updatedLists = prevLists.filter(
         (list) => list.listId !== listIdToDelete
       );
 
-      // Filter the tasks with the same category as the deleted list
+      // hittar tillhörande tasks
       const tasksToUpdate = tasks.filter(
         (task) => task.category === listCategory
       );
 
-      // Update the category of the tasks to "todo"
+      // placerar i todo
       const updatedTasks = tasks.map((task) => {
         if (task.category === listCategory) {
           return { ...task, category: "todo" };
@@ -55,7 +59,7 @@ const ListContainer = () => {
         return task;
       });
 
-      // Update the tasks state with the updated tasks
+      // uppdaterar tasks
       setTasks(updatedTasks);
 
       return updatedLists;
@@ -68,12 +72,12 @@ const ListContainer = () => {
         <TaskList
           key={taskList.listId}
           title={taskList.title}
-          renderAddTask={taskList.title === "todo"}
           listId={taskList.listId}
           onDeleteList={onDeleteList}
           color={taskList.color}
         />
       ))}
+      {/* visar AddListForm efter toggle */}
       {showForm && (
         <AddListForm
           taskLists={taskLists}
@@ -81,11 +85,11 @@ const ListContainer = () => {
           setShowForm={setShowForm}
         />
       )}
+      {/* togglar AddListForm */}
       <button
         className="show-form"
         onClick={() => setShowForm(!showForm)}
         style={{
-          // color: "white",
           color: showForm ? "red" : "green",
           border: "none",
           cursor: "pointer",

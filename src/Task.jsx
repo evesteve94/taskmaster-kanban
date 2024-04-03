@@ -1,13 +1,12 @@
 import { useContext } from "react";
 import { FaTrashCan, FaCircleExclamation } from "react-icons/fa6";
-import { DataContext } from "./DataContext";
+import { DataContext } from "./context/DataContext";
 
 const Task = ({ task }) => {
   const { tasks, setTasks, openModal } = useContext(DataContext);
 
   const handleTaskClick = () => {
     openModal(task.id); // Send the task's ID to openModal function
-    console.log(task.id);
   };
 
   const handleDeleteTask = () => {

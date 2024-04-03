@@ -3,7 +3,7 @@ import Task from "./Task";
 import AddTask from "./AddTask";
 import { FaSquareXmark } from "react-icons/fa6";
 import { Link } from "react-router-dom";
-import { DataContext } from "./DataContext";
+import { DataContext } from "./context/DataContext";
 
 const TaskList = ({ title, listId, onDeleteList, color }) => {
   const { tasks, setTasks } = useContext(DataContext);

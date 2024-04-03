@@ -1,26 +1,26 @@
 import { useEffect, useState } from "react";
+//Layout
 import Header from "./Header";
-import ListContainer from "./ListContainer";
-import ListPage from "./ListPage";
 import Footer from "./Footer";
+
+//Pages
+import ListPage from "./ListPage";
 import InformationPage from "./InformationPage";
 import ModalRoute from "./ModalRoute";
 import SettingsPage from "./SettingsPage";
 import MissingPage from "./MissingPage";
+
+//index -main
+import ListContainer from "./ListContainer";
+
+//Routes
 import { Routes, Route } from "react-router-dom";
 
 //context
-import { DataProvider } from "./DataContext";
+import { DataProvider } from "./context/DataContext";
 
 function App() {
   // localStorage.clear();
-  const [backgroundImage, setBackgroundImage] = useState(
-    localStorage.getItem("backgroundImage") || ""
-  );
-
-  useEffect(() => {
-    document.body.style.backgroundImage = `url(${backgroundImage})`;
-  }, [backgroundImage]);
   return (
     <div className="App">
       <Header />{" "}
@@ -28,15 +28,12 @@ function App() {
         <Routes>
           <Route path="/" element={<ListContainer />} />
 
-          {/* Route for the modal */}
+          {/* ModalRoute undersöker om en task är klickad - returnerar Modal + task.id som endpoint} */}
 
           <Route path="/tasks/:taskId" element={<ModalRoute />} />
           <Route path="/Lists/:title" element={<ListPage />} />
           <Route path="/info" element={<InformationPage />} />
-          <Route
-            path="/settings"
-            element={<SettingsPage setBackgroundImage={setBackgroundImage} />}
-          />
+          <Route path="/settings" element={<SettingsPage />} />
           <Route path="*" element={<MissingPage />} />
         </Routes>
       </DataProvider>

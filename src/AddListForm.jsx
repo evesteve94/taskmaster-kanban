@@ -1,36 +1,46 @@
 import React, { useState } from "react";
 import { FaSquarePlus } from "react-icons/fa6";
 
+//tar in props för listor och boolean för formuläret
 const AddListForm = ({ taskLists, setTaskLists, setShowForm }) => {
+  //states för ny lista och listfärg
   const [newList, setNewList] = useState("");
   const [color, setColor] = useState("#d3d3d3");
 
+  //hanterar att listan skickas in
   const handleListSubmit = (e) => {
     e.preventDefault();
     if (!newList) return;
-    addList(newList, color); // Pass the selected color to addList
-    setNewList("");
-    setShowForm(false);
+    //skickar med titel och färg till anropad funktion
+    addList(newList, color);
+    setNewList(""); //nollställer
+    setShowForm(false); //döljer form
   };
 
+  //lägger till listan
   const addList = (listTitle, listColor) => {
     const id = taskLists.length + 1;
     const newList = {
       listId: id,
       title: listTitle,
-      color: listColor, // Set the color of the new list
+      color: listColor,
     };
+    //spread + newList
     setTaskLists((prevLists) => {
       const updatedLists = [...prevLists, newList];
+      //sparar i localStorage
       localStorage.setItem("lists", JSON.stringify(updatedLists));
       return updatedLists;
     });
   };
+
   const handleColorChange = (e) => {
     const newValue = e.target.value.toUpperCase();
+    //konverterar till HEX + opaque värde
     const rgbaColor = `${newValue}${parseInt(0.658 * 255, 10)
       .toString(16)
-      .padStart(2, "0")}`; // Convert opacity to hexadecimal and append to color
+      .padStart(2, "0")}`;
+    //tillämpar ny färg, lightgrey som default
     setColor(newValue === "" ? "#d3d3d3" : rgbaColor);
   };
 

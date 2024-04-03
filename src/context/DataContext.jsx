@@ -4,12 +4,15 @@ import { useNavigate } from "react-router-dom";
 export const DataContext = createContext({});
 
 export const DataProvider = ({ children }) => {
+  //tasks används i nästan varenda komponent
   const [tasks, setTasks] = useState(() => {
     const storedTasks = localStorage.getItem("tasks");
     return storedTasks ? JSON.parse(storedTasks) : [];
   });
 
   const [selectedTask, setSelectedTask] = useState(null);
+
+  //används för settings & colorPicker
   const [colors, setColors] = useState(() => {
     const storedColors = localStorage.getItem("colors");
     return storedColors
@@ -21,10 +24,11 @@ export const DataProvider = ({ children }) => {
         };
   });
 
+  //Navigera mellan sidor
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Apply colors to the root element
+    // Tillämpar mina root-colors efter användarens preferenser
     document.documentElement.style.setProperty(
       "--black-color",
       colors.blackColor
@@ -38,10 +42,12 @@ export const DataProvider = ({ children }) => {
       colors.blueColor
     );
 
-    // Save color changes to local storage
+    // sparar i localStorge
     localStorage.setItem("colors", JSON.stringify(colors));
   }, [colors]);
 
+  //use effect för tasks & colors
+  //ser till att alla ändringar som spraras i localStorage
   useEffect(() => {
     localStorage.setItem("tasks", JSON.stringify(tasks));
   }, [tasks]);
@@ -50,6 +56,7 @@ export const DataProvider = ({ children }) => {
     localStorage.setItem("colors", JSON.stringify(colors));
   }, [colors]);
 
+  //modalens functioner används i Modal & List Page
   const openModal = (taskId) => {
     const taskToEdit = tasks.find((task) => task.id === taskId);
     setSelectedTask(taskToEdit); // Set the selected task
@@ -60,10 +67,26 @@ export const DataProvider = ({ children }) => {
     setSelectedTask(null); // Reset selected task
     navigate("/"); // Navigate back to the list container route
   };
+  //hanterar tillämpning och sparning av backgrundbild
+  const [backgroundImage, setBackgroundImage] = useState(
+    localStorage.getItem("backgroundImage") || ""
+  );
+
+  useEffect(() => {
+    document.body.style.backgroundImage = `url(${backgroundImage})`;
+  }, [backgroundImage]);
 
   return (
     <DataContext.Provider
-      value={{ tasks, setTasks, openModal, closeModal, colors, setColors }}
+      value={{
+        tasks,
+        setTasks,
+        openModal,
+        closeModal,
+        colors,
+        setColors,
+        setBackgroundImage,
+      }}
     >
       {children}
     </DataContext.Provider>

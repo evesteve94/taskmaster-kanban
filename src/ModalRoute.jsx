@@ -1,19 +1,20 @@
 import { Navigate, useParams } from "react-router-dom";
 import Modal from "./Modal";
 import React, { useContext } from "react";
-import { DataContext } from "./DataContext";
+import { DataContext } from "./context/DataContext";
 
 function ModalRoute({ closeModal }) {
   const { tasks } = useContext(DataContext);
-  const { taskId } = useParams();
-  const task = tasks.find((task) => task.id === parseInt(taskId)); // Convert taskId to number
+  const { taskId } = useParams(); //är en string
+  const task = tasks.find((task) => task.id === parseInt(taskId)); // konventerar till siffra
 
   if (!task) {
     console.log("no task found");
-    // If task is not found, navigate back to the list container route
+    // om tasken inte hittas - navigerar till index
     return <Navigate to="/" replace />;
   }
 
+  //annars visas modalen
   return <Modal task={task} closeModal={closeModal} />;
 }
 

@@ -6,7 +6,7 @@ const Task = ({ task }) => {
   const { tasks, setTasks, openModal } = useContext(DataContext);
 
   const handleTaskClick = () => {
-    openModal(task.id); // Send the task's ID to openModal function
+    openModal(task.id);
   };
 
   const handleDeleteTask = () => {
@@ -18,13 +18,17 @@ const Task = ({ task }) => {
     e.dataTransfer.setData("text/plain", JSON.stringify(task));
   };
 
+  //om titeln är längre än 8 bokstäver...
+  const displayTitle =
+    task.title.length > 8 ? `${task.title.substring(0, 8)}...` : task.title;
+
   return (
     <li className="task" draggable onDragStart={handleDragStart}>
       <div className="task-header" onClick={handleTaskClick}>
         <h4 className="task-title">
           {" "}
           {task.isUrgent && <FaCircleExclamation className="urgent" />}
-          {task.title}
+          {displayTitle}
         </h4>
         <p className="task-date">{task.date}</p>
       </div>

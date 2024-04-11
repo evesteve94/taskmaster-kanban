@@ -11,7 +11,7 @@ const TaskList = ({ title, listId, onDeleteList, color }) => {
   const filteredTasks = tasks.filter((task) => task.category === title);
 
   const handleDeleteList = () => {
-    onDeleteList(listId, title); // Call the onDeleteList function with the listId as an argument
+    onDeleteList(listId, title);
   };
 
   const handleDragOver = (e) => {
@@ -22,7 +22,6 @@ const TaskList = ({ title, listId, onDeleteList, color }) => {
     e.preventDefault();
     const droppedTask = JSON.parse(e.dataTransfer.getData("text/plain"));
 
-    // Update the category of the dropped task
     const updatedTasks = tasks.map((task) => {
       if (task.id === droppedTask.id) {
         return { ...task, category: title };
@@ -54,7 +53,6 @@ const TaskList = ({ title, listId, onDeleteList, color }) => {
       {filteredTasks.map((task) => (
         <Task key={task.id} task={task} />
       ))}
-      {/* Render AddTask component if title is "todo" */}
       {title === "todo" && <AddTask tasks={tasks} setTasks={setTasks} />}
     </ul>
   );

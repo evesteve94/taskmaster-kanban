@@ -18,9 +18,9 @@ const Task = ({ task }) => {
     e.dataTransfer.setData("text/plain", JSON.stringify(task));
   };
 
-  //om titeln är längre än 8 bokstäver...
+  //om titeln är längre än 12 bokstäver...
   const displayTitle =
-    task.title.length > 8 ? `${task.title.substring(0, 8)}...` : task.title;
+    task.title.length > 12 ? `${task.title.substring(0, 12)}...` : task.title;
 
   return (
     <li className="task" draggable onDragStart={handleDragStart}>
